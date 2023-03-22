@@ -12,6 +12,10 @@ public class AuthServiceSoapBindingImpl implements it.cedaf.authservice.service.
         return null;
     }
 
+    public boolean isUserSignedOut(java.lang.String authId) throws java.rmi.RemoteException, it.cedaf.authservice.service.AuthException {
+        return false;
+    }
+
     public it.cedaf.authservice.service.AuthData retrieveUserData(java.lang.String authId) throws java.rmi.RemoteException, it.cedaf.authservice.service.AuthException {
         return null;
     }

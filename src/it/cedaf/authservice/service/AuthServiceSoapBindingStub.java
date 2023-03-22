@@ -16,7 +16,7 @@ public class AuthServiceSoapBindingStub extends org.apache.axis.client.Stub impl
     static org.apache.axis.description.OperationDesc [] _operations;
 
     static {
-        _operations = new org.apache.axis.description.OperationDesc[5];
+        _operations = new org.apache.axis.description.OperationDesc[6];
         _initOperationDesc1();
     }
 
@@ -39,6 +39,23 @@ public class AuthServiceSoapBindingStub extends org.apache.axis.client.Stub impl
         _operations[0] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
+        oper.setName("isUserSignedOut");
+        param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://service.authservice.cedaf.it", "authId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
+        oper.addParameter(param);
+        oper.setReturnType(new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "boolean"));
+        oper.setReturnClass(boolean.class);
+        oper.setReturnQName(new javax.xml.namespace.QName("http://service.authservice.cedaf.it", "isUserSignedOutReturn"));
+        oper.setStyle(org.apache.axis.constants.Style.WRAPPED);
+        oper.setUse(org.apache.axis.constants.Use.LITERAL);
+        oper.addFault(new org.apache.axis.description.FaultDesc(
+                      new javax.xml.namespace.QName("http://service.authservice.cedaf.it", "fault"),
+                      "it.cedaf.authservice.service.AuthException",
+                      new javax.xml.namespace.QName("http://service.authservice.cedaf.it", "AuthException"), 
+                      true
+                     ));
+        _operations[1] = oper;
+
+        oper = new org.apache.axis.description.OperationDesc();
         oper.setName("retrieveUserData");
         param = new org.apache.axis.description.ParameterDesc(new javax.xml.namespace.QName("http://service.authservice.cedaf.it", "authId"), org.apache.axis.description.ParameterDesc.IN, new javax.xml.namespace.QName("http://www.w3.org/2001/XMLSchema", "string"), java.lang.String.class, false, false);
         oper.addParameter(param);
@@ -53,7 +70,7 @@ public class AuthServiceSoapBindingStub extends org.apache.axis.client.Stub impl
                       new javax.xml.namespace.QName("http://service.authservice.cedaf.it", "AuthException"), 
                       true
                      ));
-        _operations[1] = oper;
+        _operations[2] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("retrieveUserDataV2");
@@ -70,7 +87,7 @@ public class AuthServiceSoapBindingStub extends org.apache.axis.client.Stub impl
                       new javax.xml.namespace.QName("http://service.authservice.cedaf.it", "AuthException"), 
                       true
                      ));
-        _operations[2] = oper;
+        _operations[3] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("revalidateUserData");
@@ -87,7 +104,7 @@ public class AuthServiceSoapBindingStub extends org.apache.axis.client.Stub impl
                       new javax.xml.namespace.QName("http://service.authservice.cedaf.it", "AuthException"), 
                       true
                      ));
-        _operations[3] = oper;
+        _operations[4] = oper;
 
         oper = new org.apache.axis.description.OperationDesc();
         oper.setName("singleSignOut");
@@ -104,7 +121,7 @@ public class AuthServiceSoapBindingStub extends org.apache.axis.client.Stub impl
                       new javax.xml.namespace.QName("http://service.authservice.cedaf.it", "AuthException"), 
                       true
                      ));
-        _operations[4] = oper;
+        _operations[5] = oper;
 
     }
 
@@ -266,12 +283,54 @@ public class AuthServiceSoapBindingStub extends org.apache.axis.client.Stub impl
 }
     }
 
-    public it.cedaf.authservice.service.AuthData retrieveUserData(java.lang.String authId) throws java.rmi.RemoteException, it.cedaf.authservice.service.AuthException {
+    public boolean isUserSignedOut(java.lang.String authId) throws java.rmi.RemoteException, it.cedaf.authservice.service.AuthException {
         if (super.cachedEndpoint == null) {
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
         _call.setOperation(_operations[1]);
+        _call.setUseSOAPAction(true);
+        _call.setSOAPActionURI("");
+        _call.setEncodingStyle(null);
+        _call.setProperty(org.apache.axis.client.Call.SEND_TYPE_ATTR, Boolean.FALSE);
+        _call.setProperty(org.apache.axis.AxisEngine.PROP_DOMULTIREFS, Boolean.FALSE);
+        _call.setSOAPVersion(org.apache.axis.soap.SOAPConstants.SOAP11_CONSTANTS);
+        _call.setOperationName(new javax.xml.namespace.QName("http://service.authservice.cedaf.it", "isUserSignedOut"));
+
+        setRequestHeaders(_call);
+        setAttachments(_call);
+ try {        java.lang.Object _resp = _call.invoke(new java.lang.Object[] {authId});
+
+        if (_resp instanceof java.rmi.RemoteException) {
+            throw (java.rmi.RemoteException)_resp;
+        }
+        else {
+            extractAttachments(_call);
+            try {
+                return ((java.lang.Boolean) _resp).booleanValue();
+            } catch (java.lang.Exception _exception) {
+                return ((java.lang.Boolean) org.apache.axis.utils.JavaUtils.convert(_resp, boolean.class)).booleanValue();
+            }
+        }
+  } catch (org.apache.axis.AxisFault axisFaultException) {
+    if (axisFaultException.detail != null) {
+        if (axisFaultException.detail instanceof java.rmi.RemoteException) {
+              throw (java.rmi.RemoteException) axisFaultException.detail;
+         }
+        if (axisFaultException.detail instanceof it.cedaf.authservice.service.AuthException) {
+              throw (it.cedaf.authservice.service.AuthException) axisFaultException.detail;
+         }
+   }
+  throw axisFaultException;
+}
+    }
+
+    public it.cedaf.authservice.service.AuthData retrieveUserData(java.lang.String authId) throws java.rmi.RemoteException, it.cedaf.authservice.service.AuthException {
+        if (super.cachedEndpoint == null) {
+            throw new org.apache.axis.NoEndPointException();
+        }
+        org.apache.axis.client.Call _call = createCall();
+        _call.setOperation(_operations[2]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -313,7 +372,7 @@ public class AuthServiceSoapBindingStub extends org.apache.axis.client.Stub impl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[2]);
+        _call.setOperation(_operations[3]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -355,7 +414,7 @@ public class AuthServiceSoapBindingStub extends org.apache.axis.client.Stub impl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[3]);
+        _call.setOperation(_operations[4]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
@@ -397,7 +456,7 @@ public class AuthServiceSoapBindingStub extends org.apache.axis.client.Stub impl
             throw new org.apache.axis.NoEndPointException();
         }
         org.apache.axis.client.Call _call = createCall();
-        _call.setOperation(_operations[4]);
+        _call.setOperation(_operations[5]);
         _call.setUseSOAPAction(true);
         _call.setSOAPActionURI("");
         _call.setEncodingStyle(null);
